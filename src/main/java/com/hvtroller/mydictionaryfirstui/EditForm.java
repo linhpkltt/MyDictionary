@@ -7,6 +7,7 @@ package com.hvtroller.mydictionaryfirstui;
 
 import com.hvtroller.mydictionaryfirstui.dictionary.Dictionary;
 import com.hvtroller.mydictionaryfirstui.dictionary.Word;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -16,7 +17,8 @@ public class EditForm extends javax.swing.JDialog {
 
     private Dictionary dict;
     private String word;
-
+    private DefaultListModel<String> model;
+    private int index;
     /**
      * Creates new form EditForm
      */
@@ -26,13 +28,26 @@ public class EditForm extends javax.swing.JDialog {
     }
 
     public EditForm(java.awt.Frame parent, boolean modal,
-            String word, String explain, Dictionary dict) {
+            String word, String explain, Dictionary dict, 
+            DefaultListModel<String> model, int index) {
         super(parent, modal);
         initComponents();
         this.word = word;
         this.txtWord.setText(word);
         this.txtExplain.setText(explain);
         this.dict = dict;
+        this.model = model;
+        this.index = index;
+    }
+
+    public EditForm(java.awt.Frame parent, boolean modal, Dictionary dict, DefaultListModel<String> model) {
+        super(parent, modal);
+        initComponents();
+        this.word = "";
+        this.txtWord.setText("");
+        this.txtExplain.setText("");
+        this.dict = dict;
+        this.model = model;
     }
 
     /**
@@ -113,8 +128,14 @@ public class EditForm extends javax.swing.JDialog {
         if (word.isBlank() || explain.isBlank()) {
 
         } else {
-            this.dict.getDictionary().remove(this.word);
+            if (!this.word.isBlank()) {
+                this.dict.getDictionary().remove(this.word);
+                this.model.set(index, word);
+            } else {
+                this.model.addElement(word);
+            }
             this.dict.getDictionary().put(word, new Word(word, explain));
+            
             this.dispose();
         }
     }//GEN-LAST:event_btnUpdateActionPerformed

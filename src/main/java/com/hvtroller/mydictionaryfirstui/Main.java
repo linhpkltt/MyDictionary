@@ -65,6 +65,7 @@ public class Main extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         btnGoogleTranslate = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
+        btnAddWord = new javax.swing.JButton();
         explainPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -103,7 +104,7 @@ public class Main extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(searchResult);
 
-        btnDelete.setText("delete");
+        btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
@@ -119,6 +120,13 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        btnAddWord.setText("Add");
+        btnAddWord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddWordActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout wordPanelLayout = new javax.swing.GroupLayout(wordPanel);
         wordPanel.setLayout(wordPanelLayout);
         wordPanelLayout.setHorizontalGroup(
@@ -128,19 +136,18 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(wordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(wordPanelLayout.createSequentialGroup()
-                        .addGroup(wordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(wordPanelLayout.createSequentialGroup()
-                                .addComponent(btnDelete)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(wordPanelLayout.createSequentialGroup()
-                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnGoogleTranslate, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)))
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnGoogleTranslate, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
                         .addGap(10, 10, 10))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, wordPanelLayout.createSequentialGroup()
                         .addGroup(wordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(wordPanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnAddWord)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnDelete)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnEdit))
                             .addComponent(jScrollPane1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -162,7 +169,8 @@ public class Main extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(wordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnDelete)
-                            .addComponent(btnEdit)))
+                            .addComponent(btnEdit)
+                            .addComponent(btnAddWord)))
                     .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
@@ -246,9 +254,10 @@ public class Main extends javax.swing.JFrame {
         if (index >= 0 && index <= model.size()) {
             String word = model.get(index);
             String explain = dict.getDictionary().get(word).getWord_explain();
-            EditForm edit = new EditForm(self, rootPaneCheckingEnabled, word, explain, dict);
+            EditForm edit = new EditForm(self, rootPaneCheckingEnabled, word,
+                    explain, dict, model, index);
             edit.setVisible(true);
-            txtWordDetail.setText(model.get(index));
+            txtWordDetail.setText(dict.getDictionary().get(model.get(index)).getWord_explain());
         }
     }//GEN-LAST:event_btnEditActionPerformed
 
@@ -270,6 +279,15 @@ public class Main extends javax.swing.JFrame {
                 dict.getDictionary().get(model.get(index)).getAudio_path());
         player.start();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnAddWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddWordActionPerformed
+        // TODO add your handling code here:
+        if (index >= 0 && index <= model.size()) {
+            EditForm edit = new EditForm(self, rootPaneCheckingEnabled, dict, model);
+            edit.setVisible(true);
+            txtWordDetail.setText(model.get(model.size() - 1));
+        }
+    }//GEN-LAST:event_btnAddWordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -307,6 +325,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddWord;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnGoogleTranslate;
