@@ -11,7 +11,7 @@ import javax.swing.DefaultListModel;
 
 /**
  *
- * @author vuvie
+ * @author Khanh Linh
  */
 public class EditForm extends javax.swing.JDialog {
 

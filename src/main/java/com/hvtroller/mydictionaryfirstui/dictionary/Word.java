@@ -14,7 +14,7 @@ import javax.sound.sampled.Clip;
 
 /**
  *
- * @author vuvie
+ * @author Khanh Linh
  */
 public class Word {
 

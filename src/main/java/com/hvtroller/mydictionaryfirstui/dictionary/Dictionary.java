@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author vuvie
+ * @author Khanh Linh
  */
 public class Dictionary {
     private final HashMap<String, Word> dictionary = new HashMap<>();

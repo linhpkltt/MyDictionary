@@ -22,7 +22,7 @@ import javazoom.jl.player.Player;
  */
 /**
  *
- * @author vuvie
+ * @author Khanh Linh
  */
 public class AudioPlayer extends Thread {
 

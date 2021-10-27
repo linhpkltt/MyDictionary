@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author vuvie
+ * @author Khanh Linh
  */
 public class DictionaryManagement {
 

@@ -22,7 +22,7 @@ import javax.swing.event.DocumentListener;
 
 /**
  *
- * @author vuvie
+ * @author Khanh Linh
  */
 public class Main extends javax.swing.JFrame {
 

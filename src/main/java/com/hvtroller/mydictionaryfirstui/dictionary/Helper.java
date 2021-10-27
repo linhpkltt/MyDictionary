@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author vuvie
+ * @author Khanh Linh
  */
 public class Helper {
     public Scanner scanner = new Scanner(System.in);
